@@ -12,6 +12,8 @@ public class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserHistoryRepository userHistoryRepository;
 
     @Test
     void crud() {
@@ -27,5 +29,16 @@ public class UserRepositoryTest {
         System.out.println(userRepository.findById(savedUser.getId()));
         System.out.println("updatedAt = " + savedUser.getUpdatedAt());
         System.out.println("createdAt = " + savedUser.getCreatedAt());
+    }
+
+    @Test
+    void entityListenerBackupTest() {
+        User user = userRepository.findById(1L).get();
+        userHistoryRepository.findAll().forEach(System.out::println);
+        user.setName("modify");
+
+        userRepository.save(user);
+
+        userHistoryRepository.findAll().forEach(System.out::println);
     }
 }
