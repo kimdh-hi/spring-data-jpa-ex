@@ -15,9 +15,17 @@ public class UserRepositoryTest {
 
     @Test
     void crud() {
-        userRepository.save(new User());
+        User user = userRepository.findById(1L).get();
 
-        userRepository.findAll().forEach(System.out::println);
+        System.out.println(user);
+        System.out.println("updatedAt = " + user.getUpdatedAt());
+        System.out.println("createdAt = " + user.getCreatedAt());
+        user.setName("modify");
 
+        User savedUser = userRepository.save(user);
+
+        System.out.println(userRepository.findById(savedUser.getId()));
+        System.out.println("updatedAt = " + savedUser.getUpdatedAt());
+        System.out.println("createdAt = " + savedUser.getCreatedAt());
     }
 }
