@@ -20,6 +20,11 @@ public class Book extends BaseEntity{
 
     private String category;
 
+    //== 양방향 - BookReviewInfo ==//
+    @OneToOne(mappedBy = "book")
+    @ToString.Exclude
+    private BookReviewInfo bookReviewInfo;
+
     @Builder(builderMethodName = "createBook")
     public Book(String title, String content, String category) {
         this.title = title;

@@ -20,10 +20,20 @@ class BookReviewInfoRepositoryTest {
     @Test
     void Read() {
         Book book = initBookData();
-        initBookReviewInfoRepository(book);
+        Long bookReviewInfoId = initBookReviewInfo(book);
 
         BookReviewInfo bookReviewInfo = bookReviewInfoRepository.findById(1L).orElseThrow(IllegalArgumentException::new);
         System.out.println(bookReviewInfo.getBook().getTitle());
+    }
+
+    @Test
+    void 양방향_테스트() {
+        Book book = initBookData();
+        Long bookReviewInfoId = initBookReviewInfo(book);
+
+        Book findBook = bookRepository.findById(book.getId()).orElseThrow(IllegalArgumentException::new);
+
+
 
     }
 
@@ -39,7 +49,7 @@ class BookReviewInfoRepositoryTest {
         return  bookRepository.save(book);
     }
 
-    private void initBookReviewInfoRepository(Book book) {
+    private Long initBookReviewInfo(Book book) {
         System.out.println(">>> initBookReviewInfoData");
 
         BookReviewInfo bookReviewInfo = BookReviewInfo.crateBookReviewInfo()
@@ -48,6 +58,8 @@ class BookReviewInfoRepositoryTest {
                 .avgReviewScore(5.0f)
                 .build();
 
-        bookReviewInfoRepository.save(bookReviewInfo);
+        BookReviewInfo saved = bookReviewInfoRepository.save(bookReviewInfo);
+
+        return saved.getId();
     }
 }
