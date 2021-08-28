@@ -1,6 +1,7 @@
 package com.springdatajpa.repository;
 
 import com.springdatajpa.domain.entity.User;
+import com.springdatajpa.domain.value.Gender;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,4 +40,16 @@ public class UserRepositoryTest {
 
         userHistoryRepository.findAll().forEach(System.out::println);
     }
+
+    @Test
+    void 관계_테스트() {
+        User user = User.createUser()
+                .name("test").email("test@naver.com").gender(Gender.MALE)
+                .build();
+        userRepository.save(user);
+
+        userRepository.findAll().forEach(System.out::println);
+        userHistoryRepository.findAll().forEach(System.out::println);
+    }
+
 }

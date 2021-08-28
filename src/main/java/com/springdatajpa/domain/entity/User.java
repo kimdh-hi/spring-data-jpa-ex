@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Entity
-@Builder
 @EntityListeners(value = UserHistoryBackupListener.class)
 public class User extends BaseEntity{
     @Id
@@ -27,4 +26,11 @@ public class User extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @Builder(builderMethodName = "createUser")
+    public User(String name, String email, Gender gender) {
+        this.name = name;
+        this.email = email;
+        this.gender = gender;
+    }
 }

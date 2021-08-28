@@ -16,7 +16,7 @@ public class UserHistory extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -28,4 +28,12 @@ public class UserHistory extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @Builder(builderMethodName = "createUserHistory")
+    public UserHistory(User user, String name, String email, Gender gender) {
+        this.user = user;
+        this.name = name;
+        this.email = email;
+        this.gender = gender;
+    }
 }

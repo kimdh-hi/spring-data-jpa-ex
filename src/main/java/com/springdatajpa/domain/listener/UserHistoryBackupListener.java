@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
 import javax.persistence.PreUpdate;
 
 @Slf4j
@@ -15,7 +17,8 @@ import javax.persistence.PreUpdate;
 @RequiredArgsConstructor
 public class UserHistoryBackupListener {
 
-    @PreUpdate
+    @PostPersist
+    @PostUpdate
     public void preUpdate(Object obj) {
         log.info("UserHistoryBackupListener preUpdate 호출");
         UserHistoryRepository userHistoryRepository = BeanUtils.getBean(UserHistoryRepository.class);
@@ -26,6 +29,7 @@ public class UserHistoryBackupListener {
                 .user(user)
                 .name(user.getName())
                 .email(user.getEmail())
+                .gender(user.getGender())
                 .build();
 
         userHistoryRepository.save(userHistory);
