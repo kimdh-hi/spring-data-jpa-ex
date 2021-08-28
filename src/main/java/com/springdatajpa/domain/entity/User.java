@@ -5,6 +5,8 @@ import com.springdatajpa.domain.value.Gender;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,6 +28,10 @@ public class User extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @OneToMany
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private List<UserHistory> userHistories = new ArrayList<>();
 
     @Builder(builderMethodName = "createUser")
     public User(String name, String email, Gender gender) {

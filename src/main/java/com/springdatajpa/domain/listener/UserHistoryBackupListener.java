@@ -26,7 +26,7 @@ public class UserHistoryBackupListener {
         User user = (User) obj;
 
         UserHistory userHistory = UserHistory.builder()
-                .user(user)
+                .userId(user.getId())
                 .name(user.getName())
                 .email(user.getEmail())
                 .gender(user.getGender())

@@ -16,9 +16,8 @@ public class UserHistory extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_id")
+    private Long userId;
 
     @Column(nullable = false)
     private String name;
@@ -30,8 +29,8 @@ public class UserHistory extends BaseEntity{
     private Gender gender;
 
     @Builder(builderMethodName = "createUserHistory")
-    public UserHistory(User user, String name, String email, Gender gender) {
-        this.user = user;
+    public UserHistory(Long userId, String name, String email, Gender gender) {
+        this.userId = userId;
         this.name = name;
         this.email = email;
         this.gender = gender;

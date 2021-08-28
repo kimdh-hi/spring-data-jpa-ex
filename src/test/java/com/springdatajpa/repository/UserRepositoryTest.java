@@ -48,8 +48,13 @@ public class UserRepositoryTest {
                 .build();
         userRepository.save(user);
 
-        userRepository.findAll().forEach(System.out::println);
-        userHistoryRepository.findAll().forEach(System.out::println);
+        user.setName("modify");
+        userRepository.save(user);
+
+        user.setEmail("modify@naver.com");
+        userRepository.save(user);
+
+        userHistoryRepository.findByUserId(user.getId()).forEach(System.out::println);
     }
 
 }

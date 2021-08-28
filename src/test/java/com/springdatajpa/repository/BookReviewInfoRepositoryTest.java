@@ -33,8 +33,6 @@ class BookReviewInfoRepositoryTest {
 
         Book findBook = bookRepository.findById(book.getId()).orElseThrow(IllegalArgumentException::new);
 
-
-
     }
 
     private Book initBookData() {
