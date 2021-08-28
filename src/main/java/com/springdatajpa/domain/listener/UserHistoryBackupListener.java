@@ -1,10 +1,9 @@
 package com.springdatajpa.domain.listener;
 
-import com.springdatajpa.domain.User;
-import com.springdatajpa.domain.UserHistory;
+import com.springdatajpa.domain.entity.User;
+import com.springdatajpa.domain.entity.UserHistory;
 import com.springdatajpa.repository.UserHistoryRepository;
 import com.springdatajpa.utils.BeanUtils;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -24,7 +23,7 @@ public class UserHistoryBackupListener {
         User user = (User) obj;
 
         UserHistory userHistory = UserHistory.builder()
-                .userId(user.getId())
+                .user(user)
                 .name(user.getName())
                 .email(user.getEmail())
                 .build();

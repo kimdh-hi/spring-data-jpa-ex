@@ -1,26 +1,24 @@
-package com.springdatajpa.domain;
+package com.springdatajpa.domain.entity;
 
+import com.springdatajpa.domain.value.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
 @Entity
 @Builder
-public class UserHistory extends BaseEntity{
+public class Publisher extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
-
-    private String name;
-
-    private String email;
+    @Embedded
+    private Address address;
 }

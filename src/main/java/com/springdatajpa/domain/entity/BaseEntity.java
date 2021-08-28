@@ -1,4 +1,4 @@
-package com.springdatajpa.domain;
+package com.springdatajpa.domain.entity;
 
 import lombok.Data;
 import lombok.ToString;
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Data
 public class BaseEntity {
     @Column(name = "created_at")
-    @CreatedDate
+    @CreatedDate 
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     @LastModifiedDate

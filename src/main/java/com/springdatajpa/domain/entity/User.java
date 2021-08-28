@@ -1,16 +1,16 @@
-package com.springdatajpa.domain;
+package com.springdatajpa.domain.entity;
 
 import com.springdatajpa.domain.listener.UserHistoryBackupListener;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.springdatajpa.domain.value.Gender;
+import lombok.*;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Builder
 @EntityListeners(value = UserHistoryBackupListener.class)
@@ -19,7 +19,12 @@ public class User extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 }
