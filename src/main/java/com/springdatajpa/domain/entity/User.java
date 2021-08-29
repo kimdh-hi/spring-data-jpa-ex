@@ -33,6 +33,11 @@ public class User extends BaseEntity{
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private List<UserHistory> userHistories = new ArrayList<>();
 
+    @OneToMany
+    @ToString.Exclude
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private List<Review> reviews = new ArrayList<>();
+
     @Builder(builderMethodName = "createUser")
     public User(String name, String email, Gender gender) {
         this.name = name;

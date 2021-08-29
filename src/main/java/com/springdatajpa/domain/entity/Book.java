@@ -25,10 +25,15 @@ public class Book extends BaseEntity{
     @ToString.Exclude
     private BookReviewInfo bookReviewInfo;
 
+    @ManyToOne
+    @ToString.Exclude
+    private Publisher publisher;
+
     @Builder(builderMethodName = "createBook")
-    public Book(String title, String content, String category) {
+    public Book(String title, String content, String category, Publisher publisher) {
         this.title = title;
         this.content = content;
         this.category = category;
+        this.publisher = publisher;
     }
 }
