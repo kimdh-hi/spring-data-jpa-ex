@@ -1,20 +1,18 @@
 package com.springdatajpa.domain.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Entity
-@Builder
+@ToString(callSuper = true)
 public class Author extends BaseEntity {
 
     @Id
@@ -24,4 +22,18 @@ public class Author extends BaseEntity {
     private String name;
 
     private String country;
+
+    @ManyToMany
+    @ToString.Exclude
+    private List<Book> books = new ArrayList<>();
+
+    public void addBook(Book... book) {
+        this.books.addAll(Arrays.stream(book).collect(Collectors.toList()));
+    }
+
+    @Builder(builderMethodName = "createTestAuthor")
+    public Author(String name) {
+        this.name = name;
+        this.country = country;
+    }
 }

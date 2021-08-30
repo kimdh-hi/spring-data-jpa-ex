@@ -4,11 +4,15 @@ import com.springdatajpa.domain.listener.UserHistoryBackupListener;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @Getter
 @Entity
-@ToString
+@ToString(callSuper = true)
 public class Book extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +32,14 @@ public class Book extends BaseEntity{
     @ManyToOne
     @ToString.Exclude
     private Publisher publisher;
+
+    @ManyToMany
+
+    private List<Author> authors = new ArrayList<>();
+
+    public void addAuthor(Author... author) {
+        this.authors.addAll(Arrays.stream(author).collect(Collectors.toList()));
+    }
 
     @Builder(builderMethodName = "createBook")
     public Book(String title, String content, String category, Publisher publisher) {
